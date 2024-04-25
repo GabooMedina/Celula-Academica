@@ -16,6 +16,12 @@
 }
 
 /************ Default Css ************/
+.container1{
+  padding: 100px 40%;
+  background:url(/src/assets/img/fondo.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+}
 * {
   margin: 0;
   padding: 0;
