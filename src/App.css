@@ -26,7 +26,11 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 75px;
 }
-
+.container-us{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 body {
   font-weight: 400;
   overflow-x: hidden;

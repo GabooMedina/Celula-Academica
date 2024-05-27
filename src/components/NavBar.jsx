@@ -1,5 +1,3 @@
-
-import React from 'react';
 import { useState, useEffect } from "react"; 
 /*
 useState es un hook de React para gestionar el estado interno de componentes funcionales, 
@@ -55,7 +53,7 @@ export const NavBar = () => {
     <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
       <Container>
         <Navbar.Brand as={Link} to="/">
-          <img src={logo} alt="Logo" />
+          <img src="https://userscontent2.emaze.com/images/a1b6bad6-aeea-4745-bbd3-29cca653ff4a/a762c2be-ca8a-4c62-b096-5a255a11bc63image2.png" alt="Logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
           <span className="navbar-toggler-icon"></span>
@@ -63,8 +61,9 @@ export const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Inicio</Nav.Link>
+            <Nav.Link as={Link} to="/añadirus" className={activeLink === 'añadirus' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('añadirus')}>Añadir Personas</Nav.Link>
             <Nav.Link as={Link} to="/information" className={activeLink === 'information' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('information')}>Información</Nav.Link>
-            <Nav.Link as={Link} to="/nosotros" className={activeLink === 'nosotros' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('about-us')}>Nosotros</Nav.Link>
+            <Nav.Link as={Link} to="/about-us" className={activeLink === 'about-us' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('about-us')}>Nosotros</Nav.Link>
           </Nav>
           <span className="navbar-text">
     
