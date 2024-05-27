@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import headerImg from "../assets/img/header-img.svg";
@@ -39,3 +40,5 @@ export const Banner = () => {
         </section>
     )
 }
+
+export default Banner;
