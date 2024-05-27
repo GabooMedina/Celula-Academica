@@ -1,3 +1,5 @@
+
+import React from 'react';
 import { useState, useEffect } from "react"; 
 /*
 useState es un hook de React para gestionar el estado interno de componentes funcionales, 
@@ -62,7 +64,7 @@ export const NavBar = () => {
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Inicio</Nav.Link>
             <Nav.Link as={Link} to="/information" className={activeLink === 'information' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('information')}>Información</Nav.Link>
-            <Nav.Link as={Link} to="/about-us" className={activeLink === 'about-us' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('about-us')}>Nosotros</Nav.Link>
+            <Nav.Link as={Link} to="/nosotros" className={activeLink === 'nosotros' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('about-us')}>Nosotros</Nav.Link>
           </Nav>
           <span className="navbar-text">
     

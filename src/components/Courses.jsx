@@ -1,11 +1,9 @@
+import React from 'react';
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
 import { Cards } from "./Cards";
 import cursoImg1 from "../assets/img/cursoPython.png";
 import cursoImg2 from "../assets/img/java.png";
 import cursoImg3 from "../assets/img/js.png";
-import cursoImg4 from "../assets/img/php.png";
-import cursoImg5 from "../assets/img/cisco.png";
-import cursoImg6 from "../assets/img/piton.png";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import 'animate.css';
 import '../styles/Courses.css';
