@@ -6,13 +6,16 @@ import { Footer } from "../components/Footer";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Formulario from "../components/Formulario";
+import ConcursoView from '../components/concursoView';
+
 function AñadirUs(){
     return (
         <>
         <NavBar />
         
-        <Formulario/>
+       <ConcursoView/>
         </>
     );
 }
+// <Formulario/>
 export default AñadirUs;
