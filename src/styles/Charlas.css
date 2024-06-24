@@ -1,0 +1,38 @@
+.charla-card-wrapper {
+    width: 100%;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    transition: transform 0.2s;
+}
+
+.charla-card-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.charla-card-wrapper h5 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.charla-card-wrapper .card-body {
+    padding: 0;
+}
+
+.charla-card-wrapper .image-container {
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.charla-card-wrapper .card-text {
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-align: center;
+}

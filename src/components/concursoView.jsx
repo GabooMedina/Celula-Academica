@@ -10,7 +10,7 @@ const ConcursoView = () => {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedConcurso, setSelectedConcurso] = useState(null);
-  
+
   const [formData, setFormData] = useState({
     cedula: '',
     nombre: '',
@@ -19,12 +19,22 @@ const ConcursoView = () => {
     correo: '',
     carrera: 'Software',
     semestre: '',
+    nombreGrupo: '', 
+  });
+
+  const [formErrors, setFormErrors] = useState({
+    cedula: '',
+    telefono: '',
+    semestre: '',
+    nombre: '',
+    apellido: '',
+    nombreGrupo: ''
   });
 
   useEffect(() => {
     const fetchConcursos = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/eventos/concursos/');
+        const response = await axios.get('https://admin-celula-academica.onrender.com/api/eventos/concursos/');
         setConcursos(response.data);
       } catch (error) {
         setError(error);
@@ -56,19 +66,65 @@ const ConcursoView = () => {
       correo: '',
       carrera: 'Software',
       semestre: '',
+      nombreGrupo: '', 
+    });
+    setFormErrors({
+      cedula: '',
+      telefono: '',
+      semestre: '',
+      nombre: '',
+      apellido: '',
+      nombreGrupo: ''
     });
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    let errorMessage = '';
+    if (name === 'cedula' || name === 'telefono') {
+      if (!/^\d*$/.test(value)) {
+        errorMessage = 'Solo se permiten números';
+      } else if (value.length > 10) {
+        errorMessage = 'No puede tener más de 10 dígitos';
+      }
+    } else if (name === 'semestre') {
+      if (!/^[1-9]$|^10$/.test(value)) {
+        errorMessage = 'El semestre debe ser un número entre 1 y 10';
+      }
+    } else if (['nombre', 'apellido', 'nombreGrupo'].includes(name)) {
+      if (!/^[a-zA-Z\s]*$/.test(value)) {
+        errorMessage = 'Solo se permiten letras';
+      }
+    }
+
     setFormData({
       ...formData,
       [name]: value,
+    });
+
+    setFormErrors({
+      ...formErrors,
+      [name]: errorMessage
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const newFormErrors = {
+      cedula: formData.cedula.length !== 10 ? 'La cédula debe tener exactamente 10 dígitos' : '',
+      telefono: formData.telefono.length !== 10 ? 'El teléfono debe tener exactamente 10 dígitos' : '',
+      semestre: !/^[1-9]$|^10$/.test(formData.semestre) ? 'El semestre debe ser un número entre 1 y 10' : '',
+      nombre: !/^[a-zA-Z\s]+$/.test(formData.nombre) ? 'Solo se permiten letras' : '',
+      apellido: !/^[a-zA-Z\s]+$/.test(formData.apellido) ? 'Solo se permiten letras' : '',
+      nombreGrupo: selectedConcurso && !selectedConcurso.competencia_individual && !/^[a-zA-Z\s]+$/.test(formData.nombreGrupo) ? 'Solo se permiten letras' : ''
+    };
+
+    if (Object.values(newFormErrors).some(error => error)) {
+      setFormErrors(newFormErrors);
+      return;
+    }
 
     const dataToSend = {
       cedula: formData.cedula,
@@ -78,15 +134,17 @@ const ConcursoView = () => {
       correo: formData.correo,
       carrera: formData.carrera,
       semestre: formData.semestre,
+      nombre_grupo: selectedConcurso && !selectedConcurso.competencia_individual ? formData.nombreGrupo : null,  // Usar null en lugar de cadena vacía
       concurso: selectedConcurso.id,
     };
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/eventos/inscripciones/', dataToSend);
+      const response = await axios.post('https://admin-celula-academica.onrender.com/api/eventos/inscripciones/', dataToSend);
       console.log('Formulario enviado:', response.data);
       handleCloseModal();
     } catch (error) {
-      console.error('Error al enviar el formulario:', error);
+      //console.error('Error al enviar el formulario:', error);
+      alert("Se ha alcanzado el numero maximo de integrantes para este grupo");
     }
   };
 
@@ -100,7 +158,7 @@ const ConcursoView = () => {
         {concursos.length > 0 ? (
           concursos.map((concurso) => (
             <div className="col-lg-4 col-md-6 mb-4" key={concurso.id}>
-              <div className="card h-100 concurso-card" onClick={() => handleShowModal(concurso)}>
+              <div className="concurso-card-wrapper" onClick={() => handleShowModal(concurso)}>
                 <div className="card-body">
                   <h5 className="card-title">{concurso.nombre}</h5>
                   <p className="card-text">{concurso.descripcion}</p>
@@ -136,7 +194,11 @@ const ConcursoView = () => {
                 value={formData.cedula}
                 onChange={handleInputChange}
                 required
+                isInvalid={!!formErrors.cedula}
               />
+              <Form.Control.Feedback type="invalid">
+                {formErrors.cedula}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="formNombre">
               <Form.Label>Nombre</Form.Label>
@@ -146,7 +208,11 @@ const ConcursoView = () => {
                 value={formData.nombre}
                 onChange={handleInputChange}
                 required
+                isInvalid={!!formErrors.nombre}
               />
+              <Form.Control.Feedback type="invalid">
+                {formErrors.nombre}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="formApellido">
               <Form.Label>Apellido</Form.Label>
@@ -156,7 +222,11 @@ const ConcursoView = () => {
                 value={formData.apellido}
                 onChange={handleInputChange}
                 required
+                isInvalid={!!formErrors.apellido}
               />
+              <Form.Control.Feedback type="invalid">
+                {formErrors.apellido}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="formTelefono">
               <Form.Label>Teléfono</Form.Label>
@@ -166,7 +236,11 @@ const ConcursoView = () => {
                 value={formData.telefono}
                 onChange={handleInputChange}
                 required
+                isInvalid={!!formErrors.telefono}
               />
+              <Form.Control.Feedback type="invalid">
+                {formErrors.telefono}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="formCorreo">
               <Form.Label>Correo</Form.Label>
@@ -199,8 +273,28 @@ const ConcursoView = () => {
                 value={formData.semestre}
                 onChange={handleInputChange}
                 required
+                isInvalid={!!formErrors.semestre}
               />
+              <Form.Control.Feedback type="invalid">
+                {formErrors.semestre}
+              </Form.Control.Feedback>
             </Form.Group>
+            {selectedConcurso && !selectedConcurso.competencia_individual && (
+              <Form.Group controlId="formNombreGrupo">
+                <Form.Label>Nombre del Grupo</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="nombreGrupo"
+                  value={formData.nombreGrupo}
+                  onChange={handleInputChange}
+                  required
+                  isInvalid={!!formErrors.nombreGrupo}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {formErrors.nombreGrupo}
+                </Form.Control.Feedback>
+              </Form.Group>
+            )}
             <Button variant="primary" type="submit" className="mt-3">
               Inscribirse
             </Button>
