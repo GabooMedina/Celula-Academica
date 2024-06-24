@@ -36,3 +36,6 @@
     margin-bottom: 10px;
     text-align: center;
 }
+.custom-margin-top {
+    margin-top: 8rem; /* Puedes ajustar este valor según lo necesario */
+  }
