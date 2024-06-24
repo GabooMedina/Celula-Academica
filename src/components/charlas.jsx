@@ -9,7 +9,7 @@ const Charlas = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [ponente, setPonente] = useState(null);
+  const [ponentes, setPonentes] = useState([]);
 
   useEffect(() => {
     const fetchCharlas = async () => {
@@ -29,19 +29,20 @@ const Charlas = () => {
 
   const handleShowModal = async (charla) => {
     try {
-      const response = await axios.get(`https://admin-celula-academica.onrender.com/api/eventos/ponentes/${charla.ponentes}`);
-      console.log(response.data.ponente);
-      setPonente(response.data);
+      const ponenteRequests = charla.ponentes.map(id => axios.get(`https://admin-celula-academica.onrender.com/api/eventos/ponentes/${id}`));
+      const ponenteResponses = await Promise.all(ponenteRequests);
+      const ponenteData = ponenteResponses.map(response => response.data);
+      console.log(ponenteData);
+      setPonentes(ponenteData);
       setShowModal(true);
     } catch (error) {
-      
       setError(error);
     }
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setPonente(null);
+    setPonentes([]);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -71,7 +72,6 @@ const Charlas = () => {
                   <p className="card-text">Fecha de inicio: {charla.fecha_inicio}</p>
                   <p className="card-text">Fecha de fin: {charla.fecha_fin}</p>
                   <p className="card-text">Horario: {charla.fecha_fin}</p>
-                  
                 </div>
               </div>
             </div>
@@ -86,14 +86,17 @@ const Charlas = () => {
           <Modal.Title>Información del Ponente</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {ponente ? (
-            <div>
-              <h5>{ponente.nombre} {ponente.apellido}</h5>
-              <p>{ponente.biografia}</p>
-              <p><strong>Email:</strong> {ponente.correo}</p>
-              <p><strong>Teléfono:</strong> {ponente.telefono}</p>
-              <h6>Horario: {ponente.hora_inicio} - {ponente.hora_fin}</h6>
-            </div>
+          {ponentes.length > 0 ? (
+            ponentes.map((ponente, index) => (
+              <div key={index}>
+                <h5>{ponente.nombre} {ponente.apellido}</h5>
+                <p>{ponente.biografia}</p>
+                <p><strong>Email:</strong> {ponente.correo}</p>
+                <p><strong>Teléfono:</strong> {ponente.telefono}</p>
+                <h6>Horario: {ponente.hora_inicio} - {ponente.hora_fin}</h6>
+                <hr />
+              </div>
+            ))
           ) : (
             <p>Loading...</p>
           )}
