@@ -50,7 +50,7 @@ const Charlas = () => {
 
   return (
     <div className="container mt-5">
-      <h1 className="mb-4 text-center">Charlas</h1>
+       <h1 className="mb-4 text-center custom-margin-top">Charlas</h1>
       <div className="row">
         {charlas.length > 0 ? (
           charlas.map((charla) => (

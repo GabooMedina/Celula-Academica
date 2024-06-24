@@ -153,7 +153,7 @@ const ConcursoView = () => {
 
   return (
     <div className="container mt-5">
-      <h1 className="mb-4 text-center">Concursos</h1>
+      <h1 className="mb-4 text-center custom-margin-top">Concursos</h1>
       <div className="row">
         {concursos.length > 0 ? (
           concursos.map((concurso) => (
