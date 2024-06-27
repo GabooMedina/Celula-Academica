@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"; 
+import React from 'react';
 /*
 useState es un hook de React para gestionar el estado interno de componentes funcionales, 
 mientras que useEffect permite realizar efectos secundarios en dichos componentes, ejecutando código 
@@ -62,7 +63,7 @@ export const NavBar = () => {
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Inicio</Nav.Link>
             <Nav.Link as={Link} to="/charlas" className={activeLink === 'charlas' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('charlas')}>Charlas</Nav.Link>
-            <Nav.Link as={Link} to="/cursos" className={activeLink === 'cursos' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('cursos')}>Concursos</Nav.Link>
+           <Nav.Link as={Link} to="/cursos" className={activeLink === 'cursos' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('cursos')}>Concursos</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
