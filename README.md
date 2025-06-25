@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# 🎓 Plataforma Educativa para Gestión de Eventos Académicos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+  <img src="https://img.icons8.com/color/96/000000/calendar--v1.png" width="80"/>
+</div>
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📋 Descripción General
 
-### `npm start`
+Plataforma web moderna para la gestión integral de eventos académicos que permite:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 🗓️ **Programación inteligente** de eventos y calendario compartido
+- 📝 **Inscripciones automatizadas** con validación en tiempo real
+- 📢 **Difusión centralizada** de noticias facultativas
+- 👨‍🏫 **Gestión completa** para administradores y participantes
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🚀 Características Principales
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🎯 Inscripción a Eventos
+- Formularios dinámicos por tipo de evento  
+- Límites de capacidad configurables  
+- Confirmación por email/notificación  
 
-### `npm run build`
+### 📅 Calendario Académico
+- Vista mensual/semanal/diaria 
+- Recordatorios automáticos  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 📌 Gestión de Contenidos
+- Panel administrativo intuitivo  
+- Categorización por carreras/departamentos  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 🔔 Notificaciones
+- Alertas personalizables  
+- Multi-canal (email, push, SMS)  
+- Programación de avisos  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+### 🗂 Estructura del Proyecto
+```bash
+src/
+├── 📁 assets/            # Recursos estáticos
+├── 📁 components/        # Componentes reusables
+│   ├── Banner.jsx        # Componente de cabecera
+│   ├── Cards.jsx         # Tarjetas de eventos
+│   ├── FormularioG.jsx   # Formulario genérico
+│   └── ...               # (otros componentes)
+├── 📁 views/             # Vistas principales
+│   ├── CharlasView.jsx   # Vista de charlas
+│   ├── Login.jsx         # Autenticación
+│   └── ...               # (otras vistas)
+└── 📁 styles/            # Estilos CSS
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🏗 Arquitectura del Sistema
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```mermaid
+graph TD
+    A[Frontend React] -->|Consume| B[Django REST API]
+    B --> C[(PostgreSQL)]
+    B --> D[Auth Service]
+    A --> E[Calendar Service]
+    D --> F[Google Auth]
+```
+### 🛠 Stack Tecnológico - Frontend
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| **Componente** | **Tecnología**   | **Versión** |
+|---------------|------------------|-------------|
+| Framework     | React.js         | 18.2+       |
+| Lenguaje      | JavaScript       | ES6+        |
+| Estilos       | CSS Modules      | -           |
+| Routing       | React Router     | 6.4+        |
+| Gestión de Estado | Context API   | Incluido    |
+| HTTP Client   | Axios            | 1.2+        |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Backend
+Componente	Tecnología	Versión
+Framework	Django	4.1+
+API	Django REST Framework	3.14+
+Base de Datos	PostgreSQL	14+
 
-## Learn More
+### ⚙️ Requisitos del Sistema
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+##### Frontend
+Node.js 16.x o superior
+NPM 8.x+
+Navegador moderno (Chrome, Firefox, Edge)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+##### Backend
+Python 3.9+
+PostgreSQL 14+
+pip 22.x+
 
-### Code Splitting
+### 🛠 Instalación
+```bash
+# 1. Clonar repositorio
+git clone https://github.com/GabooMedina/Celula-Academica.git
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# 2. Instalar dependencias frontend
+cd frontend && npm install
 
-### Analyzing the Bundle Size
+# 3. Configurar backend (requiere virtualenv)
+cd ../backend && pip install -r requirements.txt
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# 4. Iniciar servidores
+npm start  # Frontend (puerto 3000)
+python manage.py runserver  # Backend (puerto 8000)
+```
+### 👤 Autor
+Gabriel Medina
+Daniel Izurieta
